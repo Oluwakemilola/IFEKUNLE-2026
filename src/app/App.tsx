@@ -143,7 +143,7 @@ export default function App() {
             >
               <div className="h-80 overflow-hidden flex items-center justify-center bg-gray-100">
                 <ImageWithFallback
-                  src="/images/DSC_3563.jpg"
+                  src="/images/DSC_3563.JPG"
                   alt="Engagement celebration"
                   className="w-full h-full object-cover object-center"
                 />
@@ -192,7 +192,7 @@ export default function App() {
             >
               <div className="h-80 overflow-hidden flex items-center justify-center bg-gray-100">
                 <ImageWithFallback
-                  src="/images/DSC_3644.jpg"
+                  src="/images/DSC_3644.JPG"
                   alt="Church wedding"
                   className="w-full h-full object-cover object-center"
                   
@@ -388,7 +388,7 @@ export default function App() {
           <motion.div {...fadeInUp}>
             <div className="mb-8">
               <ImageWithFallback
-                src="/images/DSC_3668.jpg"
+                src="/images/DSC_3668.JPG"
                 alt="Wedding flowers"
                 className="w-64 h-64 mx-auto object-cover rounded-full shadow-xl"
               />
