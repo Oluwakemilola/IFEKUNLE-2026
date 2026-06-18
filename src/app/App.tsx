@@ -26,12 +26,10 @@ function useCountdown(target: Date) {
   return time;
 }
 
-// ── SMOOTH SCROLL HELPER ──
 function scrollToId(id: string) {
   const el = document.getElementById(id);
   if (el) {
-    const offset = 64; // navbar height
-    const top = el.getBoundingClientRect().top + window.scrollY - offset;
+    const top = el.getBoundingClientRect().top + window.scrollY - 64;
     window.scrollTo({ top, behavior: 'smooth' });
   }
 }
@@ -49,11 +47,11 @@ function Navbar() {
 
   const links = [
     { label: 'Story', id: 'story' },
-    { label: 'Gallery', id: 'gallery' },
     { label: 'Events', id: 'events' },
     { label: 'Dress Code', id: 'dresscode' },
     { label: 'Gift', id: 'gift' },
     { label: 'RSVP', id: 'rsvp' },
+    { label: 'Gallery', id: 'gallery' },
   ];
 
   const handleLink = (id: string) => {
@@ -69,57 +67,47 @@ function Navbar() {
         borderBottom: scrolled ? `1px solid ${gold}33` : 'none',
       }}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16">
-        {/* Logo */}
         <button onClick={() => scrollToId('hero')}
-          className="font-serif text-left leading-tight flex-shrink-0"
-          style={{ color: gold, fontSize: 'clamp(0.8rem, 2.2vw, 1rem)', letterSpacing: '0.01em' }}>
+          className="font-serif flex-shrink-0"
+          style={{ color: gold, fontSize: 'clamp(0.82rem, 2.2vw, 1rem)' }}>
           Ifeoluwa & Olakunle
         </button>
 
-        {/* Desktop links */}
         <div className="hidden md:flex items-center gap-5 lg:gap-7">
           {links.map(l => (
             <button key={l.id} onClick={() => handleLink(l.id)}
-              className="text-xs tracking-[0.15em] uppercase transition-all duration-200 hover:opacity-100"
-              style={{ color: `${gold}bb`, fontFamily: 'sans-serif' }}
+              className="text-xs tracking-[0.15em] uppercase transition-colors duration-200"
+              style={{ color: `${gold}aa`, fontFamily: 'sans-serif' }}
               onMouseEnter={e => (e.currentTarget.style.color = gold)}
-              onMouseLeave={e => (e.currentTarget.style.color = `${gold}bb`)}>
+              onMouseLeave={e => (e.currentTarget.style.color = `${gold}aa`)}>
               {l.label}
             </button>
           ))}
         </div>
 
-        {/* Hamburger */}
-        <button className="md:hidden p-2 rounded-lg" onClick={() => setOpen(v => !v)}
-          style={{ color: gold, background: open ? `${gold}22` : 'transparent' }}>
+        <button className="md:hidden p-2" onClick={() => setOpen(v => !v)} style={{ color: gold }}>
           {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
       </div>
 
-      {/* Mobile dropdown */}
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0, y: -10 }}
+            initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.2 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.18 }}
             className="md:hidden"
-            style={{ background: `${deepMaroon}fa`, borderTop: `1px solid ${gold}33` }}>
-            <div className="px-6 py-2 flex flex-col">
+            style={{ background: `${deepMaroon}fc`, borderTop: `1px solid ${gold}33` }}>
+            <div className="px-6 py-1 flex flex-col">
               {links.map((l, i) => (
-                <motion.button
-                  key={l.id}
-                  initial={{ opacity: 0, x: -10 }}
+                <motion.button key={l.id}
+                  initial={{ opacity: 0, x: -8 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.05 }}
+                  transition={{ delay: i * 0.04 }}
                   onClick={() => handleLink(l.id)}
                   className="text-left py-3 text-sm tracking-[0.2em] uppercase"
-                  style={{
-                    color: gold,
-                    fontFamily: 'sans-serif',
-                    borderBottom: i < links.length - 1 ? `1px solid ${gold}22` : 'none'
-                  }}>
+                  style={{ color: gold, fontFamily: 'sans-serif', borderBottom: i < links.length - 1 ? `1px solid ${gold}1a` : 'none' }}>
                   {l.label}
                 </motion.button>
               ))}
@@ -168,7 +156,6 @@ function FlipCard({ day, colors, name, hint }: { day: string; colors: { bg: stri
         animate={{ rotateY: flipped ? 180 : 0 }}
         transition={{ duration: 0.55, type: 'spring', stiffness: 130 }}
         style={{ transformStyle: 'preserve-3d' }}>
-        {/* Front */}
         <div className="absolute inset-0 rounded-2xl p-5 sm:p-6 flex flex-col items-center justify-center"
           style={{ background: 'rgba(255,255,255,0.06)', border: `1px solid ${gold}44`, backfaceVisibility: 'hidden' }}>
           <p className="text-xs tracking-[0.3em] uppercase mb-4" style={{ color: gold }}>{day}</p>
@@ -184,7 +171,6 @@ function FlipCard({ day, colors, name, hint }: { day: string; colors: { bg: stri
           <p className="font-serif text-sm sm:text-base mb-2" style={{ color: creamLight }}>{name}</p>
           <p className="text-xs opacity-40" style={{ color: gold }}>Tap for style hint 👆</p>
         </div>
-        {/* Back */}
         <div className="absolute inset-0 rounded-2xl p-5 sm:p-6 flex flex-col items-center justify-center text-center"
           style={{ background: `linear-gradient(135deg, ${gold}25, ${gold}10)`, border: `1px solid ${gold}66`, backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}>
           <Sparkles className="w-5 h-5 mb-3" style={{ color: gold }} />
@@ -198,29 +184,22 @@ function FlipCard({ day, colors, name, hint }: { day: string; colors: { bg: stri
 
 // ── GALLERY SECTION ──
 function GallerySection({ galleryImages }: { galleryImages: { src: string; alt: string }[] }) {
-  const [isOpen, setIsOpen] = useState(false);
   const [phase, setPhase] = useState<'idle' | 'opening' | 'open'>('idle');
 
   const handleOpen = () => {
     if (phase !== 'idle') return;
     setPhase('opening');
     setTimeout(() => setPhase('open'), 900);
-    setIsOpen(true);
   };
 
-  const handleClose = () => {
-    setPhase('idle');
-    setIsOpen(false);
-  };
+  const handleClose = () => setPhase('idle');
 
   return (
     <>
-      {/* Tap to View Gallery Section */}
       <section id="gallery" className="py-16 sm:py-24 px-4 sm:px-6 relative overflow-hidden"
         style={{ background: `linear-gradient(135deg, ${creamMid} 0%, ${creamLight} 100%)` }}>
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 sm:w-96 h-64 sm:h-96 rounded-full pointer-events-none"
           style={{ background: `radial-gradient(circle, ${gold}15 0%, transparent 70%)` }} />
-
         <div className="max-w-lg mx-auto text-center relative z-10">
           <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
             <div className="flex items-center justify-center gap-2 mb-3">
@@ -234,15 +213,13 @@ function GallerySection({ galleryImages }: { galleryImages: { src: string; alt: 
             </div>
             <h2 className="font-serif mb-2" style={{ color: maroon, fontSize: 'clamp(1.8rem, 5vw, 2.8rem)' }}>Our Moments</h2>
             <p className="text-sm mb-8 leading-relaxed" style={{ color: `${gold}bb` }}>A visual love story captured in time ✨</p>
-
             {phase === 'idle' && (
               <motion.button onClick={handleOpen} whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
                 className="mx-auto flex flex-col items-center gap-4">
                 <motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
                   className="relative w-28 h-28 sm:w-32 sm:h-32">
                   <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-5xl">📸</div>
-                  <div className="absolute inset-0 rounded-full"
-                    style={{ border: `3px solid ${gold}`, boxShadow: `0 0 30px ${gold}44` }} />
+                  <div className="absolute inset-0 rounded-full" style={{ border: `3px solid ${gold}`, boxShadow: `0 0 30px ${gold}44` }} />
                 </motion.div>
                 <span className="text-xs sm:text-sm font-serif font-bold uppercase tracking-widest px-7 py-2.5 rounded-full shadow-lg"
                   style={{ color: deepMaroon, background: gold }}>
@@ -250,7 +227,6 @@ function GallerySection({ galleryImages }: { galleryImages: { src: string; alt: 
                 </span>
               </motion.button>
             )}
-
             {phase === 'opening' && (
               <motion.div className="flex justify-center"
                 initial={{ scale: 1 }} animate={{ scale: [1, 1.4, 0], rotate: [0, -15, 15, 0], opacity: [1, 1, 0] }}
@@ -262,22 +238,12 @@ function GallerySection({ galleryImages }: { galleryImages: { src: string; alt: 
         </div>
       </section>
 
-      {/* Gallery Modal Overlay */}
       <AnimatePresence>
         {phase === 'open' && (
           <>
-            {/* Backdrop */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              onClick={handleClose}
-              className="fixed inset-0 z-50 bg-black/70"
-              style={{ backdropFilter: 'blur(4px)' }}
-            />
-
-            {/* Gallery Modal */}
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }} onClick={handleClose}
+              className="fixed inset-0 z-50 bg-black/70" style={{ backdropFilter: 'blur(4px)' }} />
             <motion.div
               initial={{ opacity: 0, scale: 0.8, y: 100 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -285,30 +251,21 @@ function GallerySection({ galleryImages }: { galleryImages: { src: string; alt: 
               transition={{ type: 'spring', bounce: 0.3, duration: 0.6 }}
               className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 w-[95vw] h-[90vh] max-w-5xl rounded-2xl overflow-hidden shadow-2xl"
               style={{ background: creamLight }}>
-              
-              {/* Header */}
               <div className="flex items-center justify-between px-6 py-4" style={{ background: `linear-gradient(135deg, ${gold}, #A07840)` }}>
                 <div className="flex items-center gap-3">
                   <Camera className="w-5 h-5 text-white" />
                   <p className="text-white font-serif text-lg">Our Gallery</p>
                 </div>
-                <button onClick={handleClose}
-                  className="p-1 rounded-lg transition-all hover:bg-white/20"
-                  style={{ color: 'white' }}>
+                <button onClick={handleClose} className="p-1 rounded-lg hover:bg-white/20" style={{ color: 'white' }}>
                   <X className="w-6 h-6" />
                 </button>
               </div>
-
-              {/* Gallery Grid */}
               <div className="overflow-y-auto h-[calc(90vh-60px)] p-4 sm:p-6">
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
                   {galleryImages.map((img, i) => (
-                    <motion.div
-                      key={i}
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: i * 0.05 }}
-                      whileHover={{ scale: 1.05 }}
+                    <motion.div key={i}
+                      initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: i * 0.05 }} whileHover={{ scale: 1.05 }}
                       className="rounded-xl overflow-hidden shadow-md cursor-pointer"
                       style={{ border: `2px solid ${gold}33` }}>
                       <ImageWithFallback src={img.src} alt={img.alt}
@@ -349,7 +306,6 @@ function GiftSection() {
       <FloatingHearts />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 sm:w-96 h-64 sm:h-96 rounded-full pointer-events-none"
         style={{ background: `radial-gradient(circle, ${gold}18 0%, transparent 70%)` }} />
-
       <div className="max-w-lg mx-auto text-center relative z-10">
         <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
           <div className="flex items-center justify-center gap-2 mb-3">
@@ -451,7 +407,7 @@ export default function App() {
   const countdown = useCountdown(WEDDING_DATE);
   const heroRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] });
-  const heroImgY = useTransform(scrollYProgress, [0, 1], ['0%', '22%']);
+  const heroImgY = useTransform(scrollYProgress, [0, 1], ['0%', '20%']);
 
   const fadeInUp = {
     initial: { opacity: 0, y: 40 },
@@ -460,7 +416,6 @@ export default function App() {
     transition: { duration: 0.8 }
   };
 
-  // Gallery images — add your own paths here
   const galleryImages = [
     { src: '/images/first.JPG', alt: 'Ifeoluwa and Olakunle' },
     { src: '/images/engagement.JPG', alt: 'Engagement shoot' },
@@ -481,51 +436,112 @@ export default function App() {
       <Navbar />
 
       {/* ── HERO ── */}
-      <section id="hero" ref={heroRef} className="relative overflow-hidden" style={{ height: '100svh', minHeight: '600px', background: deepMaroon }}>
-        {/* Image contained — portrait-cropped, not stretching edge to edge on wide screens */}
+      {/*
+        KEY FIXES:
+        - No background color on the section itself (was deepMaroon, causing red bars)
+        - Image is true full-bleed: absolute inset-0, no max-w container, no side vignettes
+        - Overlay: only a very faint top tint, heavy fade only at the bottom 30%
+        - Text sits in bottom 28% of screen so faces are fully visible
+      */}
+      <section id="hero" ref={heroRef} className="relative overflow-hidden"
+        style={{ height: '100svh', minHeight: '600px' }}>
+
+        {/* Full bleed parallax image — no container, no side bars */}
         <motion.div className="absolute inset-0" style={{ y: heroImgY }}>
-          <div className="absolute inset-0 max-w-xl mx-auto left-0 right-0">
-            <ImageWithFallback src="/images/first.JPG" alt="Ifeoluwa and Olakunle"
-              className="w-full h-full object-cover" style={{ objectPosition: '50% 15%' }} />
-          </div>
-          {/* Vertical fade */}
+          <ImageWithFallback
+            src="/images/first.JPG"
+            alt="Ifeoluwa and Olakunle"
+            className="w-full h-full object-cover"
+            style={{ objectPosition: 'center 12%' }}
+          />
+          {/*
+            Gradient layers:
+            - Top 0–20%: barely-there tint so navbar text readable
+            - Middle 20–58%: completely transparent — faces shine through
+            - Bottom 58–100%: strong maroon fade for text legibility
+          */}
           <div className="absolute inset-0" style={{
-            background: 'linear-gradient(to bottom, rgba(74,15,30,0.18) 0%, rgba(0,0,0,0.0) 22%, rgba(74,15,30,0.42) 58%, rgba(74,15,30,0.97) 100%)'
+            background: [
+              'linear-gradient(to bottom,',
+              '  rgba(30,5,12,0.22) 0%,',
+              '  rgba(0,0,0,0.00) 20%,',
+              '  rgba(0,0,0,0.00) 52%,',
+              '  rgba(74,15,30,0.72) 75%,',
+              '  rgba(74,15,30,0.97) 100%',
+              ')'
+            ].join('')
           }} />
-          {/* Side vignettes — frames photo on desktop */}
-          <div className="absolute inset-y-0 left-0 w-24 sm:w-48 lg:w-64" style={{ background: `linear-gradient(to right, ${deepMaroon}, transparent)` }} />
-          <div className="absolute inset-y-0 right-0 w-24 sm:w-48 lg:w-64" style={{ background: `linear-gradient(to left, ${deepMaroon}, transparent)` }} />
         </motion.div>
 
-        {/* Text pinned to bottom */}
-        <div className="absolute bottom-0 left-0 right-0 z-10 text-center px-4 pb-8 sm:pb-12">
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1 }}>
-            <div className="flex items-center justify-center gap-3 mb-2">
-              <div className="h-px w-10 sm:w-16" style={{ background: gold }} />
-              <div className="w-1.5 h-1.5 rounded-full" style={{ background: gold }} />
-              <div className="h-px w-10 sm:w-16" style={{ background: gold }} />
+        {/* Text block — bottom of screen only */}
+        <div className="absolute inset-x-0 bottom-0 z-10 pb-8 sm:pb-12">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.1 }}
+            className="max-w-md mx-auto text-center px-5"
+          >
+            {/* Ornament */}
+            <div className="flex items-center justify-center gap-2 mb-3">
+              <div className="h-px w-10" style={{ background: `linear-gradient(to right, transparent, ${gold}cc)` }} />
+              <Heart className="w-3 h-3" style={{ color: gold, fill: gold }} />
+              <div className="h-px w-10" style={{ background: `linear-gradient(to left, transparent, ${gold}cc)` }} />
             </div>
-            <p className="text-xs tracking-[0.4em] uppercase mb-2" style={{ color: gold }}>Crowned in Love '26</p>
-            <h1 className="text-white font-serif leading-tight mb-1" style={{ fontSize: 'clamp(1.9rem, 6.5vw, 5rem)' }}>
-              Ifeoluwa & Olakunle
-            </h1>
-            <p className="text-white/65 tracking-widest mb-5" style={{ fontSize: 'clamp(0.72rem, 2vw, 0.95rem)' }}>
-              11 — 12 September 2026 · Ado Ekiti
+
+            <p style={{
+              color: `${gold}dd`,
+              fontSize: '0.6rem',
+              letterSpacing: '0.42em',
+              fontFamily: 'sans-serif',
+              textTransform: 'uppercase',
+              marginBottom: '8px'
+            }}>
+              Crowned in Love '26
             </p>
-            <div className="flex justify-center gap-2 sm:gap-3">
+
+            <h1 className="font-serif text-white"
+              style={{ fontSize: 'clamp(1.9rem, 7vw, 4.5rem)', lineHeight: 1.08, marginBottom: '6px' }}>
+              Ifeoluwa &amp; Olakunle
+            </h1>
+
+            <p style={{
+              color: 'rgba(255,255,255,0.55)',
+              fontSize: 'clamp(0.65rem, 1.8vw, 0.82rem)',
+              letterSpacing: '0.2em',
+              fontFamily: 'sans-serif',
+              marginBottom: '16px'
+            }}>
+              11 — 12 · September · 2026 · Ado Ekiti
+            </p>
+
+            {/* Compact countdown */}
+            <div className="flex justify-center gap-2">
               {[
                 { label: 'Days', value: countdown.days },
-                { label: 'Hours', value: countdown.hours },
-                { label: 'Mins', value: countdown.minutes },
-                { label: 'Secs', value: countdown.seconds },
+                { label: 'Hrs', value: countdown.hours },
+                { label: 'Min', value: countdown.minutes },
+                { label: 'Sec', value: countdown.seconds },
               ].map(({ label, value }) => (
-                <motion.div key={label}
-                  animate={label === 'Secs' ? { scale: [1, 1.07, 1] } : {}}
+                <motion.div
+                  key={label}
+                  animate={label === 'Sec' ? { scale: [1, 1.06, 1] } : {}}
                   transition={{ duration: 1, repeat: Infinity }}
-                  className="text-center rounded-xl px-3 py-2.5 sm:px-4 sm:py-3"
-                  style={{ background: 'rgba(0,0,0,0.5)', border: `1px solid ${gold}55`, minWidth: '54px' }}>
-                  <div className="text-xl sm:text-2xl font-bold text-white">{String(value).padStart(2, '0')}</div>
-                  <div className="uppercase" style={{ color: `${gold}99`, fontSize: '0.5rem', letterSpacing: '0.15em', marginTop: '2px' }}>{label}</div>
+                  style={{
+                    background: 'rgba(5,1,2,0.6)',
+                    border: `1px solid ${gold}44`,
+                    backdropFilter: 'blur(8px)',
+                    borderRadius: '8px',
+                    padding: '6px 8px',
+                    minWidth: '46px',
+                    textAlign: 'center' as const,
+                  }}
+                >
+                  <div className="font-bold text-white" style={{ fontSize: 'clamp(1rem, 3.5vw, 1.4rem)', lineHeight: 1.1 }}>
+                    {String(value).padStart(2, '0')}
+                  </div>
+                  <div style={{ color: `${gold}77`, fontSize: '0.44rem', letterSpacing: '0.18em', marginTop: '2px', fontFamily: 'sans-serif', textTransform: 'uppercase' as const }}>
+                    {label}
+                  </div>
                 </motion.div>
               ))}
             </div>
@@ -533,8 +549,9 @@ export default function App() {
         </div>
 
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2.5 }}
-          className="absolute z-10 animate-bounce left-1/2 -translate-x-1/2" style={{ bottom: '8rem' }}>
-          <ChevronDown className="w-5 h-5 text-white/70" />
+          className="absolute z-10 animate-bounce left-1/2 -translate-x-1/2"
+          style={{ bottom: '6.8rem' }}>
+          <ChevronDown className="w-5 h-5" style={{ color: 'rgba(255,255,255,0.2)' }} />
         </motion.div>
       </section>
 
@@ -602,7 +619,6 @@ export default function App() {
         <div className="max-w-3xl mx-auto text-center">
           <motion.div {...fadeInUp}>
             <p className="text-xs tracking-[0.4em] uppercase mb-3" style={{ color: gold }}>The Celebrants</p>
-
             <div className="flex justify-center items-end gap-4 sm:gap-8 mb-8">
               {[
                 { src: '/images/bride.JPG', label: 'The Bride' },
@@ -613,22 +629,15 @@ export default function App() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.7, delay: i * 0.2 }}
-                  whileHover={{ y: -6 }}
-                  className="flex flex-col items-center gap-2">
+                  whileHover={{ y: -6 }}>
                   <div className="rounded-2xl overflow-hidden shadow-2xl"
-                    style={{
-                      width: 'clamp(130px, 30vw, 200px)',
-                      height: 'clamp(160px, 38vw, 260px)',
-                      border: `3px solid ${gold}`
-                    }}>
+                    style={{ width: 'clamp(130px, 30vw, 200px)', height: 'clamp(160px, 38vw, 260px)', border: `3px solid ${gold}` }}>
                     <ImageWithFallback src={p.src} alt={p.label}
                       className="w-full h-full object-cover" style={{ objectPosition: 'center top' }} />
                   </div>
                 </motion.div>
               ))}
             </div>
-
-            {/* Names with shimmer — NO labels under photos */}
             <ShimmerText text="Ifeoluwa Oluwatomiyosi" size="clamp(1.3rem, 4vw, 2.2rem)" />
             <div className="text-2xl sm:text-3xl my-2" style={{ color: gold }}>&</div>
             <ShimmerText text="Olakunle Oladotun" size="clamp(1.3rem, 4vw, 2.2rem)" />
@@ -637,13 +646,12 @@ export default function App() {
       </section>
 
       {/* ── EVENTS ── */}
-      <section id="events" className="py-14 sm:py-20 px-4 sm:px-6" style={{ background: creamLight }}>
+      <section id="events" className="py-14 sm:py-20 px-4 sm:px-6" style={{ background: creamMid }}>
         <div className="max-w-5xl mx-auto">
           <motion.div {...fadeInUp} className="text-center mb-10">
             <p className="text-xs tracking-[0.4em] uppercase mb-3" style={{ color: gold }}>Save the Dates</p>
             <h2 className="font-serif" style={{ color: maroon, fontSize: 'clamp(1.4rem, 4vw, 2.2rem)' }}>Wedding Events</h2>
           </motion.div>
-
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
             {[
               {
@@ -729,9 +737,6 @@ export default function App() {
       {/* ── GIFT ── */}
       <GiftSection />
 
-      {/* ── GALLERY MODAL ── */}
-      <GallerySection galleryImages={galleryImages} />
-
       {/* ── RSVP ── */}
       <section id="rsvp" className="py-14 sm:py-20 px-4 sm:px-6" style={{ background: creamLight }}>
         <div className="max-w-2xl mx-auto text-center">
@@ -768,6 +773,9 @@ export default function App() {
           </motion.div>
         </div>
       </section>
+
+      {/* ── GALLERY ── */}
+      <GallerySection galleryImages={galleryImages} />
 
       {/* ── FOOTER ── */}
       <section className="py-14 sm:py-20 px-4 text-center" style={{ background: deepMaroon }}>
