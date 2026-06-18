@@ -439,7 +439,7 @@ export default function App() {
       <section id="hero" ref={heroRef} className="relative flex flex-col items-center justify-center w-full"
         style={{ 
           minHeight: '100svh',
-          paddingTop: '96px',
+          paddingTop: '80px',
           paddingBottom: '32px',
           background: `linear-gradient(135deg, ${deepMaroon} 0%, ${maroon} 100%)`
         }}>
@@ -532,7 +532,7 @@ export default function App() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5, duration: 0.8 }}
-            className="text-center mb-8"
+            className="text-center mb-4"
           >
             <p 
               style={{
