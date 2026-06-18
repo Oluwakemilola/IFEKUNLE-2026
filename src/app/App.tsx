@@ -196,7 +196,7 @@ function GallerySection({ galleryImages }: { galleryImages: { src: string; alt: 
 
   return (
     <>
-      <section id="gallery" className="py-16 sm:py-24 px-4 sm:px-6 relative overflow-hidden"
+      <section id="gallery" className="py-12 sm:py-16 px-4 sm:px-6 relative overflow-hidden"
         style={{ background: `linear-gradient(135deg, ${creamMid} 0%, ${creamLight} 100%)` }}>
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 sm:w-96 h-64 sm:h-96 rounded-full pointer-events-none"
           style={{ background: `radial-gradient(circle, ${gold}15 0%, transparent 70%)` }} />
@@ -301,7 +301,7 @@ function GiftSection() {
   };
 
   return (
-    <section id="gift" className="py-16 sm:py-24 px-4 sm:px-6 relative overflow-hidden"
+    <section id="gift" className="py-12 sm:py-16 px-4 sm:px-6 relative overflow-hidden"
       style={{ background: `linear-gradient(135deg, ${deepMaroon} 0%, ${maroon} 60%, #8B1A2F 100%)` }}>
       <FloatingHearts />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 sm:w-96 h-64 sm:h-96 rounded-full pointer-events-none"
@@ -439,8 +439,8 @@ export default function App() {
       <section id="hero" ref={heroRef} className="relative flex flex-col items-center justify-center w-full"
         style={{ 
           minHeight: '100svh',
-          paddingTop: '80px',
-          paddingBottom: '60px',
+          paddingTop: '64px',
+          paddingBottom: '32px',
           background: `linear-gradient(135deg, ${deepMaroon} 0%, ${maroon} 100%)`
         }}>
 
@@ -454,7 +454,7 @@ export default function App() {
           <motion.div 
             animate={{ opacity: [0.6, 1, 0.6] }}
             transition={{ duration: 3, repeat: Infinity }}
-            className="flex items-center justify-center gap-3 mb-6"
+            className="flex items-center justify-center gap-3 mb-4"
           >
             <div className="h-px w-8 sm:w-12" style={{ background: `linear-gradient(to right, transparent, ${gold}88)` }} />
             <Heart className="w-6 h-6 flex-shrink-0" style={{ color: gold, fill: gold }} />
@@ -473,7 +473,7 @@ export default function App() {
               fontFamily: 'sans-serif',
               textTransform: 'uppercase',
               fontWeight: 700,
-              marginBottom: '24px'
+              marginBottom: '16px'
             }}>
             Crowned in Love '26
           </motion.p>
@@ -483,7 +483,7 @@ export default function App() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.3, duration: 0.9 }}
-            className="w-full max-w-4xl relative mb-6 px-2 sm:px-4"
+            className="w-full max-w-4xl relative mb-5 px-2 sm:px-4"
             style={{
               aspectRatio: '4.2 / 3.2',
               borderRadius: '28px',
@@ -532,7 +532,7 @@ export default function App() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5, duration: 0.8 }}
-            className="text-center mb-12"
+            className="text-center mb-8"
           >
             <p 
               style={{
@@ -562,7 +562,7 @@ export default function App() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.8 }}
-            className="flex justify-center gap-3 sm:gap-4 flex-wrap mb-8"
+            className="flex justify-center gap-3 sm:gap-4 flex-wrap mb-6"
           >
             {[
               { label: 'Days', value: countdown.days },
@@ -624,7 +624,7 @@ export default function App() {
       </section>
 
       {/* ── FAMILIES ── */}
-      <section className="py-14 sm:py-20 px-4 sm:px-6" style={{ background: creamLight }}>
+      <section className="py-12 sm:py-16 px-4 sm:px-6" style={{ background: creamLight }}>
         <div className="max-w-3xl mx-auto text-center">
           <motion.div {...fadeInUp}>
             <p className="text-xs tracking-[0.4em] uppercase mb-3" style={{ color: gold }}>With Joy & Gratitude</p>
@@ -653,7 +653,7 @@ export default function App() {
       </section>
 
       {/* ── OUR STORY ── */}
-      <section id="story" className="py-14 sm:py-24 px-4 sm:px-6 relative overflow-hidden" style={{ background: maroon }}>
+      <section id="story" className="py-12 sm:py-16 px-4 sm:px-6 relative overflow-hidden" style={{ background: maroon }}>
         <div className="absolute inset-0 opacity-5"
           style={{ backgroundImage: `radial-gradient(${gold} 1px, transparent 1px)`, backgroundSize: '22px 22px' }} />
         <div className="max-w-2xl mx-auto text-center relative z-10">
@@ -683,11 +683,11 @@ export default function App() {
       </section>
 
       {/* ── COUPLE ── */}
-      <section className="py-14 sm:py-20 px-4 sm:px-6" style={{ background: creamLight }}>
+      <section className="py-12 sm:py-16 px-4 sm:px-6" style={{ background: creamLight }}>
         <div className="max-w-3xl mx-auto text-center">
           <motion.div {...fadeInUp}>
             <p className="text-xs tracking-[0.4em] uppercase mb-3" style={{ color: gold }}>The Celebrants</p>
-            <div className="flex justify-center items-end gap-4 sm:gap-8 mb-8">
+            <div className="flex justify-center items-end gap-4 sm:gap-8 mb-6">
               {[
                 { src: '/images/bride.JPG', label: 'The Bride' },
                 { src: '/images/groom.JPG', label: 'The Groom' },
@@ -714,9 +714,9 @@ export default function App() {
       </section>
 
       {/* ── EVENTS ── */}
-      <section id="events" className="py-14 sm:py-20 px-4 sm:px-6" style={{ background: creamMid }}>
+      <section id="events" className="py-12 sm:py-16 px-4 sm:px-6" style={{ background: creamMid }}>
         <div className="max-w-5xl mx-auto">
-          <motion.div {...fadeInUp} className="text-center mb-10">
+          <motion.div {...fadeInUp} className="text-center mb-8">
             <p className="text-xs tracking-[0.4em] uppercase mb-3" style={{ color: gold }}>Save the Dates</p>
             <h2 className="font-serif" style={{ color: maroon, fontSize: 'clamp(1.4rem, 4vw, 2.2rem)' }}>Wedding Events</h2>
           </motion.div>
@@ -772,12 +772,12 @@ export default function App() {
       </section>
 
       {/* ── DRESS CODE ── */}
-      <section id="dresscode" className="py-14 sm:py-20 px-4 sm:px-6" style={{ background: deepMaroon }}>
+      <section id="dresscode" className="py-12 sm:py-16 px-4 sm:px-6" style={{ background: deepMaroon }}>
         <div className="max-w-3xl mx-auto text-center">
           <motion.div {...fadeInUp}>
             <p className="text-xs tracking-[0.4em] uppercase mb-3" style={{ color: gold }}>What to Wear</p>
             <h2 className="font-serif mb-2" style={{ color: creamLight, fontSize: 'clamp(1.4rem, 4vw, 2.2rem)' }}>Dress Code</h2>
-            <p className="text-sm italic mb-10" style={{ color: `${gold}88` }}>Come correct. The couple will notice 👀</p>
+            <p className="text-sm italic mb-8" style={{ color: `${gold}88` }}>Come correct. The couple will notice 👀</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <FlipCard
                 day="Friday — Engagement"
@@ -806,7 +806,7 @@ export default function App() {
       <GiftSection />
 
       {/* ── RSVP ── */}
-      <section id="rsvp" className="py-14 sm:py-20 px-4 sm:px-6" style={{ background: creamLight }}>
+      <section id="rsvp" className="py-12 sm:py-16 px-4 sm:px-6" style={{ background: creamLight }}>
         <div className="max-w-2xl mx-auto text-center">
           <motion.div {...fadeInUp}>
             <motion.div animate={{ rotate: [0, 15, -15, 0] }} transition={{ duration: 3, repeat: Infinity }}>
@@ -846,7 +846,7 @@ export default function App() {
       <GallerySection galleryImages={galleryImages} />
 
       {/* ── FOOTER ── */}
-      <section className="py-14 sm:py-20 px-4 text-center" style={{ background: deepMaroon }}>
+      <section className="py-12 sm:py-16 px-4 text-center" style={{ background: deepMaroon }}>
         <motion.div {...fadeInUp}>
           <motion.div whileHover={{ scale: 1.04 }} className="mx-auto mb-7 rounded-full overflow-hidden shadow-2xl"
             style={{ width: 'clamp(150px, 38vw, 240px)', height: 'clamp(150px, 38vw, 240px)', border: `4px solid ${gold}` }}>
