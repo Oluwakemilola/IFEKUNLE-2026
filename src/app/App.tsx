@@ -439,7 +439,7 @@ export default function App() {
       <section id="hero" ref={heroRef} className="relative flex flex-col items-center justify-center w-full"
         style={{ 
           minHeight: '100svh',
-          paddingTop: '64px',
+          paddingTop: '96px',
           paddingBottom: '32px',
           background: `linear-gradient(135deg, ${deepMaroon} 0%, ${maroon} 100%)`
         }}>
@@ -457,7 +457,7 @@ export default function App() {
             className="flex items-center justify-center gap-3 mb-4"
           >
             <div className="h-px w-8 sm:w-12" style={{ background: `linear-gradient(to right, transparent, ${gold}88)` }} />
-            <Heart className="w-6 h-6 flex-shrink-0" style={{ color: gold, fill: gold }} />
+            <Heart className="w-5 h-5 flex-shrink-0" style={{ color: gold, fill: gold }} />
             <div className="h-px w-8 sm:w-12" style={{ background: `linear-gradient(to left, transparent, ${gold}88)` }} />
           </motion.div>
 
@@ -487,7 +487,7 @@ export default function App() {
             style={{
               aspectRatio: '4.2 / 3.2',
               borderRadius: '28px',
-              padding: '12px',
+              padding: '2px',
               background: `#E8D4B8`,
               boxShadow: `0 24px 64px rgba(0,0,0,0.35)`
             }}
@@ -518,7 +518,7 @@ export default function App() {
             transition={{ delay: 0.4, duration: 0.9 }}
             className="font-serif text-white text-center"
             style={{ 
-              fontSize: 'clamp(2.2rem, 8vw, 4rem)', 
+              fontSize: 'clamp(2rem, 7.5vw, 3.2rem)', 
               lineHeight: 1.1, 
               marginBottom: '16px',
               fontWeight: 700,
@@ -557,12 +557,39 @@ export default function App() {
             </p>
           </motion.div>
 
+          {/* Scroll indicator */}
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }} 
+            transition={{ delay: 1.8, duration: 0.6 }}
+            className="flex flex-col items-center gap-3 mb-6"
+          >
+            <motion.div
+              animate={{ y: [0, 10, 0] }}
+              transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
+            >
+              <ChevronDown className="w-6 h-6" style={{ color: 'white' }} />
+            </motion.div>
+            <motion.p
+              style={{
+                color: 'white',
+                fontSize: '0.65rem',
+                letterSpacing: '0.2em',
+                fontFamily: 'sans-serif',
+                textTransform: 'uppercase',
+                fontWeight: 500
+              }}
+            >
+              Scroll Down
+            </motion.p>
+          </motion.div>
+
           {/* Countdown */}
           <motion.div 
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.8 }}
-            className="flex justify-center gap-3 sm:gap-4 flex-wrap mb-6"
+            className="flex justify-center gap-3 sm:gap-4 flex-wrap"
           >
             {[
               { label: 'Days', value: countdown.days },
@@ -592,33 +619,6 @@ export default function App() {
                 </div>
               </motion.div>
             ))}
-          </motion.div>
-
-          {/* Scroll indicator */}
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }} 
-            transition={{ delay: 1.8, duration: 0.6 }}
-            className="flex flex-col items-center gap-3"
-          >
-            <motion.div
-              animate={{ y: [0, 10, 0] }}
-              transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
-            >
-              <ChevronDown className="w-6 h-6" style={{ color: 'white' }} />
-            </motion.div>
-            <motion.p
-              style={{
-                color: 'white',
-                fontSize: '0.65rem',
-                letterSpacing: '0.2em',
-                fontFamily: 'sans-serif',
-                textTransform: 'uppercase',
-                fontWeight: 500
-              }}
-            >
-              Scroll Down
-            </motion.p>
           </motion.div>
         </motion.div>
       </section>
