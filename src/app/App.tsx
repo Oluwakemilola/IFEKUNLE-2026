@@ -69,15 +69,15 @@ function Navbar() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16">
         <button onClick={() => scrollToId('hero')}
           className="font-serif flex-shrink-0"
-          style={{ color: gold, fontSize: 'clamp(0.82rem, 2.2vw, 1rem)' }}>
+          style={{ color: gold, fontSize: 'clamp(1rem, 2.8vw, 1.2rem)' }}>
           Ifeoluwa & Olakunle
         </button>
 
         <div className="hidden md:flex items-center gap-5 lg:gap-7">
           {links.map(l => (
             <button key={l.id} onClick={() => handleLink(l.id)}
-              className="text-xs tracking-[0.15em] uppercase transition-colors duration-200"
-              style={{ color: `${gold}aa`, fontFamily: 'sans-serif' }}
+              className="tracking-[0.15em] uppercase transition-colors duration-200"
+              style={{ color: `${gold}aa`, fontFamily: 'sans-serif', fontSize: 'clamp(0.75rem, 1.2vw, 0.95rem)' }}
               onMouseEnter={e => (e.currentTarget.style.color = gold)}
               onMouseLeave={e => (e.currentTarget.style.color = `${gold}aa`)}>
               {l.label}
@@ -436,122 +436,190 @@ export default function App() {
       <Navbar />
 
       {/* ── HERO ── */}
-      {/*
-        KEY FIXES:
-        - No background color on the section itself (was deepMaroon, causing red bars)
-        - Image is true full-bleed: absolute inset-0, no max-w container, no side vignettes
-        - Overlay: only a very faint top tint, heavy fade only at the bottom 30%
-        - Text sits in bottom 28% of screen so faces are fully visible
-      */}
-      <section id="hero" ref={heroRef} className="relative overflow-hidden"
-        style={{ height: '100svh', minHeight: '600px' }}>
+      <section id="hero" ref={heroRef} className="relative flex flex-col items-center justify-center w-full"
+        style={{ 
+          minHeight: '100svh',
+          paddingTop: '80px',
+          paddingBottom: '60px',
+          background: `linear-gradient(135deg, ${deepMaroon} 0%, ${maroon} 100%)`
+        }}>
 
-        {/* Full bleed parallax image — no container, no side bars */}
-        <motion.div className="absolute inset-0" style={{ y: heroImgY }}>
-          <ImageWithFallback
-            src="/images/first.JPG"
-            alt="Ifeoluwa and Olakunle"
-            className="w-full h-full object-cover"
-            style={{ objectPosition: 'center 12%' }}
-          />
-          {/*
-            Gradient layers:
-            - Top 0–20%: barely-there tint so navbar text readable
-            - Middle 20–58%: completely transparent — faces shine through
-            - Bottom 58–100%: strong maroon fade for text legibility
-          */}
-          <div className="absolute inset-0" style={{
-            background: [
-              'linear-gradient(to bottom,',
-              '  rgba(30,5,12,0.22) 0%,',
-              '  rgba(0,0,0,0.00) 20%,',
-              '  rgba(0,0,0,0.00) 52%,',
-              '  rgba(74,15,30,0.72) 75%,',
-              '  rgba(74,15,30,0.97) 100%',
-              ')'
-            ].join('')
-          }} />
-        </motion.div>
-
-        {/* Text block — bottom of screen only */}
-        <div className="absolute inset-x-0 bottom-0 z-10 pb-8 sm:pb-12">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.1 }}
-            className="max-w-md mx-auto text-center px-5"
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.2, ease: 'easeOut' }}
+          className="flex flex-col items-center w-full px-4 sm:px-6"
+        >
+          {/* Top ornament */}
+          <motion.div 
+            animate={{ opacity: [0.6, 1, 0.6] }}
+            transition={{ duration: 3, repeat: Infinity }}
+            className="flex items-center justify-center gap-3 mb-6"
           >
-            {/* Ornament */}
-            <div className="flex items-center justify-center gap-2 mb-3">
-              <div className="h-px w-10" style={{ background: `linear-gradient(to right, transparent, ${gold}cc)` }} />
-              <Heart className="w-3 h-3" style={{ color: gold, fill: gold }} />
-              <div className="h-px w-10" style={{ background: `linear-gradient(to left, transparent, ${gold}cc)` }} />
-            </div>
+            <div className="h-px w-8 sm:w-12" style={{ background: `linear-gradient(to right, transparent, ${gold}88)` }} />
+            <Heart className="w-6 h-6 flex-shrink-0" style={{ color: gold, fill: gold }} />
+            <div className="h-px w-8 sm:w-12" style={{ background: `linear-gradient(to left, transparent, ${gold}88)` }} />
+          </motion.div>
 
-            <p style={{
-              color: `${gold}dd`,
-              fontSize: '0.6rem',
-              letterSpacing: '0.42em',
+          {/* Tagline */}
+          <motion.p 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2, duration: 0.8 }}
+            style={{
+              color: `${gold}e0`,
+              fontSize: 'clamp(0.85rem, 2.2vw, 1.1rem)',
+              letterSpacing: '0.45em',
               fontFamily: 'sans-serif',
               textTransform: 'uppercase',
-              marginBottom: '8px'
+              fontWeight: 700,
+              marginBottom: '24px'
             }}>
-              Crowned in Love '26
-            </p>
+            Crowned in Love '26
+          </motion.p>
 
-            <h1 className="font-serif text-white"
-              style={{ fontSize: 'clamp(1.9rem, 7vw, 4.5rem)', lineHeight: 1.08, marginBottom: '6px' }}>
-              Ifeoluwa &amp; Olakunle
-            </h1>
-
-            <p style={{
-              color: 'rgba(255,255,255,0.55)',
-              fontSize: 'clamp(0.65rem, 1.8vw, 0.82rem)',
-              letterSpacing: '0.2em',
-              fontFamily: 'sans-serif',
-              marginBottom: '16px'
-            }}>
-              11 — 12 · September · 2026 · Ado Ekiti
-            </p>
-
-            {/* Compact countdown */}
-            <div className="flex justify-center gap-2">
-              {[
-                { label: 'Days', value: countdown.days },
-                { label: 'Hrs', value: countdown.hours },
-                { label: 'Min', value: countdown.minutes },
-                { label: 'Sec', value: countdown.seconds },
-              ].map(({ label, value }) => (
-                <motion.div
-                  key={label}
-                  animate={label === 'Sec' ? { scale: [1, 1.06, 1] } : {}}
-                  transition={{ duration: 1, repeat: Infinity }}
-                  style={{
-                    background: 'rgba(5,1,2,0.6)',
-                    border: `1px solid ${gold}44`,
-                    backdropFilter: 'blur(8px)',
-                    borderRadius: '8px',
-                    padding: '6px 8px',
-                    minWidth: '46px',
-                    textAlign: 'center' as const,
-                  }}
-                >
-                  <div className="font-bold text-white" style={{ fontSize: 'clamp(1rem, 3.5vw, 1.4rem)', lineHeight: 1.1 }}>
-                    {String(value).padStart(2, '0')}
-                  </div>
-                  <div style={{ color: `${gold}77`, fontSize: '0.44rem', letterSpacing: '0.18em', marginTop: '2px', fontFamily: 'sans-serif', textTransform: 'uppercase' as const }}>
-                    {label}
-                  </div>
-                </motion.div>
-              ))}
+          {/* Card container */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.3, duration: 0.9 }}
+            className="w-full max-w-4xl relative mb-6 px-2 sm:px-4"
+            style={{
+              aspectRatio: '4.2 / 3.2',
+              borderRadius: '28px',
+              padding: '12px',
+              background: `#E8D4B8`,
+              boxShadow: `0 24px 64px rgba(0,0,0,0.35)`
+            }}
+          >
+            {/* Image inside card */}
+            <div
+              className="w-full h-full rounded-2xl overflow-hidden"
+              style={{
+                background: creamLight,
+                boxShadow: `inset 0 1px 3px rgba(0,0,0,0.05)`
+              }}
+            >
+              <motion.div style={{ y: heroImgY }} className="w-full h-full">
+                <ImageWithFallback
+                  src="/images/first.JPG"
+                  alt="Ifeoluwa and Olakunle"
+                  className="w-full h-full object-cover"
+                  style={{ objectPosition: 'center 25%' }}
+                />
+              </motion.div>
             </div>
           </motion.div>
-        </div>
 
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2.5 }}
-          className="absolute z-10 animate-bounce left-1/2 -translate-x-1/2"
-          style={{ bottom: '6.8rem' }}>
-          <ChevronDown className="w-5 h-5" style={{ color: 'rgba(255,255,255,0.2)' }} />
+          {/* Main headline */}
+          <motion.h1 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 0.9 }}
+            className="font-serif text-white text-center"
+            style={{ 
+              fontSize: 'clamp(2.2rem, 8vw, 4rem)', 
+              lineHeight: 1.1, 
+              marginBottom: '16px',
+              fontWeight: 700,
+              letterSpacing: '-0.01em'
+            }}>
+            Ifeoluwa &amp; Olakunle
+          </motion.h1>
+
+          {/* Date & location */}
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5, duration: 0.8 }}
+            className="text-center mb-12"
+          >
+            <p 
+              style={{
+                color: 'white',
+                fontSize: 'clamp(0.85rem, 2.2vw, 1rem)',
+                letterSpacing: '0.15em',
+                fontFamily: 'sans-serif',
+                marginBottom: '6px',
+                fontWeight: 300
+              }}>
+              11 — 12 · September · 2026
+            </p>
+            <p
+              style={{
+                color: `${gold}dd`,
+                fontSize: 'clamp(0.75rem, 2vw, 0.95rem)',
+                letterSpacing: '0.12em',
+                fontFamily: 'sans-serif',
+                fontWeight: 300
+              }}>
+              Ado Ekiti, Nigeria
+            </p>
+          </motion.div>
+
+          {/* Countdown */}
+          <motion.div 
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6, duration: 0.8 }}
+            className="flex justify-center gap-3 sm:gap-4 flex-wrap mb-8"
+          >
+            {[
+              { label: 'Days', value: countdown.days },
+              { label: 'Hours', value: countdown.hours },
+              { label: 'Mins', value: countdown.minutes },
+              { label: 'Secs', value: countdown.seconds },
+            ].map(({ label, value }, idx) => (
+              <motion.div
+                key={label}
+                animate={idx === 3 ? { scale: [1, 1.08, 1] } : {}}
+                transition={{ duration: 1, repeat: Infinity }}
+                className="flex flex-col items-center"
+                style={{
+                  background: `rgba(109,26,46,0.5)`,
+                  border: `1.5px solid ${gold}55`,
+                  backdropFilter: 'blur(12px)',
+                  borderRadius: '14px',
+                  padding: '12px 16px',
+                  minWidth: '60px',
+                }}
+              >
+                <div className="font-serif font-bold text-white" style={{ fontSize: 'clamp(1.8rem, 5.5vw, 2.8rem)', lineHeight: 1, fontWeight: 900 }}>
+                  {String(value).padStart(2, '0')}
+                </div>
+                <div style={{ color: `${gold}88`, fontSize: '0.5rem', letterSpacing: '0.15em', marginTop: '6px', fontFamily: 'sans-serif', textTransform: 'uppercase' as const, fontWeight: 700 }}>
+                  {label}
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          {/* Scroll indicator */}
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }} 
+            transition={{ delay: 1.8, duration: 0.6 }}
+            className="flex flex-col items-center gap-3"
+          >
+            <motion.div
+              animate={{ y: [0, 10, 0] }}
+              transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
+            >
+              <ChevronDown className="w-6 h-6" style={{ color: 'white' }} />
+            </motion.div>
+            <motion.p
+              style={{
+                color: 'white',
+                fontSize: '0.65rem',
+                letterSpacing: '0.2em',
+                fontFamily: 'sans-serif',
+                textTransform: 'uppercase',
+                fontWeight: 500
+              }}
+            >
+              Scroll Down
+            </motion.p>
+          </motion.div>
         </motion.div>
       </section>
 
