@@ -725,7 +725,7 @@ export default function App() {
               {
                 src: '/images/engagement.JPG', pos: 'center 20%', day: 'Friday', title: 'Engagement',
                 details: [
-                  { icon: Calendar, text: 'Thursday, 11 September 2026' },
+                  { icon: Calendar, text: 'Friday, 11 September 2026' },
                   { icon: Clock, text: '1:00 PM' },
                   { icon: MapPin, text: 'NULGE Cooperative Hall, Basiri\nOff Old Iyin Road, Ado Ekiti' },
                 ],
